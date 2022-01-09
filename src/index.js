@@ -42,6 +42,12 @@ manager.onLoad = () => {
 
 }
 
+function delay( time ) {
+
+  return new Promise( resolve => setTimeout( resolve, time ) )
+
+}
+
 function onTransitionEnd( event ) { event.target.remove() }
 
 const progress = document.getElementById( 'progress' )
@@ -51,7 +57,7 @@ manager.onProgress = function ( item, loaded, total ) {
 
 	progress.style.width = ( loaded / total * 180 ) + 20 + 'px'
 
-	const grow = 500 + ( loaded / total * 250 )
+	const grow = 550 + ( loaded / total * 275 )
 	loader.style.width = loader.style.height = grow + 'px'
 	loader.style.margin = ( -grow / 2 ) + 'px 0 0 ' + ( -grow / 2 ) + 'px'
 
@@ -197,7 +203,15 @@ function startShow() {
 	pmremGenerator.fromCubemap( texture ).texture
 
 	renderer.physicallyCorrectLights = true
+
+	animate()
 	
+}
+
+delay( 2300 ).then( () => startTween() )
+
+function startTween() {
+
 	var uavTween = new TWEEN.Tween( uavPos )
 	var uavDist = -100
 	uavTween.to( { z: uavDist }, 10000 )
@@ -211,29 +225,37 @@ function startShow() {
 	cameraTween.start()
 
 	uavTween.onUpdate( () => {
+
 		uav.position.z = uavPos.z
+	
 	} )
 
 	uavTween.onComplete( () => {
+
 		uavTweening = false
+	
 	} )
 
 	cameraTween.onComplete( () => {
+	
 		cameraTweening = false
-		controls.minPolarAngle = THREE.Math.degToRad( 100 )
+		controls.minPolarAngle = THREE.Math.degToRad( 95 )
 		controls.maxPolarAngle = THREE.Math.degToRad( 180 )
+	
 	} )
 
-	animate()
-	
 }
 
 window.addEventListener( 'resize', onWindowResize, false )
+
 function onWindowResize() {
+
 	camera.aspect = window.innerWidth / window.innerHeight
 	camera.updateProjectionMatrix()
 	renderer.setSize( window.innerWidth, window.innerHeight )
+
 	animate()
+
 }
 
 const camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, .1, 1000 )
@@ -249,7 +271,12 @@ renderer.setSize( window.innerWidth, window.innerHeight )
 /////////////////// CABLE
 
 var cablePoints = []
-cablePoints.push( new THREE.Vector3( -.8, -.6, -.7 ), new THREE.Vector3( -.8, -.3, -1.2 ), new THREE.Vector3( .5, 0, -2) )
+
+cablePoints.push( 
+	new THREE.Vector3( -.8, -.6, -.7 ), 
+	new THREE.Vector3( -.8, -.3, -1.2 ), 
+	new THREE.Vector3( .5, 0, -2) 
+)
 
 var cablePath = new THREE.CatmullRomCurve3( cablePoints )
 
@@ -257,9 +284,14 @@ const cableShape = new THREE.Shape()
 cableShape.moveTo( 0, 0 )
 cableShape.absarc( 0, 0, .1, 0, Math.PI * 2, false )
 
-var cableGeo = new THREE.ExtrudeGeometry( cableShape, { bevelEnabled: false, extrudePath: cablePath } )
+var cableGeo = new THREE.ExtrudeGeometry( 
+	cableShape, 
+	{ bevelEnabled: false, extrudePath: cablePath } 
+)
 
-var cableMat = new THREE.MeshStandardMaterial( { color: 0x140021, roughness: .5, metalness: .5 } )
+var cableMat = new THREE.MeshStandardMaterial( 
+	{ color: 0x140021, roughness: .5, metalness: .5 } 
+)
 
 var cable = new THREE.Mesh( cableGeo, cableMat )
 
@@ -311,11 +343,14 @@ function createPixelData() {
 	var context = canvas.getContext( '2d' )
 
 	image.onload = () => {
+
 		image.width = canvas.width = imageWidth
 		image.height = canvas.height = imageHeight
 		context.drawImage( image, 0, 0, imageWidth, imageHeight )
 		imageData = context.getImageData( 0, 0, imageWidth, imageHeight ).data
+		
 		createParticles()
+
 	}
 
 	image.src = skyPrint
@@ -548,28 +583,26 @@ function animate() {
 			particleSystem.geometry.attributes.position.array[ ( smokepuffs[ i ] - 3 ) ] 
 			+= ( Math.random() -.5 ) / 5
 
-			// if ( particleSystem.geometry.attributes.color.array[ smokepuffs[ i ] ] <= 0 ) {
+			if ( particleSystem.geometry.attributes.color.array[ smokepuffs[ i ] ] <= 0 ) {
 
-			// 	smokepuffs.slice( i, 1 )
-			// 	smokepuffs.slice( ( i - 3 ) / 4, 1 )
-			// 	smokepuffs.slice( ( i - 3 ) / 3, 1 )
-			// 	smokepuffs.slice( ( i - 3 ) / 2, 1 )
-			// 	smokepuffs.slice( i - 3, 1 )
-				
-			// 	console.log(smokepuffs.length)
+				smokepuffs.splice( i, 1 )
+				smokepuffs.splice( ( i - 3 ) / 4, 1 )
+				smokepuffs.splice( ( i - 3 ) / 3, 1 )
+				smokepuffs.splice( ( i - 3 ) / 2, 1 )
+				smokepuffs.splice( i - 3, 1 )
 
-			// 	if( smokepuffs.length < 1 ) {
+				if( smokepuffs.length < 1 ) {
 
-			// 		scene.remove( particleSystem )
-			// 		scene.remove( gc )
-			// 		scene.remove( uav )
-			// 		scene.remove( cable )
-			// 		controls.minPolarAngle = THREE.Math.degToRad( 0 )
-			// 		controls.maxPolarAngle = THREE.Math.degToRad( 360 )
+					scene.remove( particleSystem )
+					scene.remove( gc )
+					scene.remove( uav )
+					scene.remove( cable )
+					controls.minPolarAngle = THREE.Math.degToRad( 0 )
+					controls.maxPolarAngle = THREE.Math.degToRad( 360 )
 
-			// 	}
+				}
 
-			// }
+			}
 
 		}
 
