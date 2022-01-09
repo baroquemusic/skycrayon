@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -29,6 +30,12 @@ const config = {
             title: 'SkyCrayon Demo Flight',
             template: path.resolve(__dirname, 'src/template.html'),
             favicon: 'src/assets/favicon.ico'
+        }),
+        new CopyPlugin({
+            patterns: [
+                'src/assets/Philosopher.woff',
+                'src/assets/SkyCrayon_logo.svg'
+            ]
         }),
     ],
     module: {

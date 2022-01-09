@@ -1,4 +1,3 @@
-import './style.scss'
 import { initializeApp } from "firebase/app"
 import { getAnalytics } from "firebase/analytics"
 
@@ -72,9 +71,9 @@ const loader = document.getElementById( 'loader' )
 
 manager.onProgress = function ( item, loaded, total ) {
 
-	progress.style.width = ( loaded / total * 180 ) + 20 + 'px'
-
 	const grow = 550 + ( loaded / total * 275 )
+	progress.style.width = grow / 3 + 20 + 'px'
+
 	loader.style.width = loader.style.height = grow + 'px'
 	loader.style.margin = ( -grow / 2 ) + 'px 0 0 ' + ( -grow / 2 ) + 'px'
 
