@@ -32,7 +32,30 @@ const gltfLoader = new GLTFLoader( manager )
 
 const textureLoader = new THREE.TextureLoader( manager )
 
-manager.onLoad = () => { startShow() }
+manager.onLoad = () => { 
+
+	const loadingScreen = document.getElementById( 'loading-screen' )
+	loadingScreen.classList.add( 'fade-out' )
+	loadingScreen.addEventListener( 'transitionend', onTransitionEnd )
+
+	startShow() 
+
+}
+
+function onTransitionEnd( event ) { event.target.remove() }
+
+const progress = document.getElementById( 'progress' )
+const loader = document.getElementById( 'loader' )
+
+manager.onProgress = function ( item, loaded, total ) {
+
+	progress.style.width = ( loaded / total * 180 ) + 20 + 'px'
+
+	const grow = 500 + ( loaded / total * 250 )
+	loader.style.width = loader.style.height = grow + 'px'
+	loader.style.margin = ( -grow / 2 ) + 'px 0 0 ' + ( -grow / 2 ) + 'px'
+
+}
 
 const texture = textureLoader.load(
 
@@ -145,8 +168,7 @@ gltfLoader.load( unmannedAerialVehicle, ( u ) => {
 
 		uav = u.scene
 
-		uav.children[ 4 ].material = matProp
-
+		uav.children[4].material = matProp
 		uav.children[1].material = hullPink
 		uav.children[0].material = uav.children[2].material =	hullPurple
 		uav.children[3].material = hullYellow
@@ -271,8 +293,8 @@ const controls = new OrbitControls( camera, renderer.domElement )
 controls.enablePan = false
 controls.enableDamping = true
 controls.dampingFactor = .2
-controls.minDistance = 5
-controls.maxDistance = 350
+controls.minDistance = 50
+controls.maxDistance = 250
 
 ///////////////////// PARTICLE SYSTEM
 
@@ -526,15 +548,28 @@ function animate() {
 			particleSystem.geometry.attributes.position.array[ ( smokepuffs[ i ] - 3 ) ] 
 			+= ( Math.random() -.5 ) / 5
 
-			if ( particleSystem.geometry.attributes.color.array[ smokepuffs[ i ] ] <= 0 ) {
+			// if ( particleSystem.geometry.attributes.color.array[ smokepuffs[ i ] ] <= 0 ) {
 
-				smokepuffs.slice( i, 1 )
-				smokepuffs.slice( ( i - 3 ) / 4, 1 )
-				smokepuffs.slice( ( i - 3 ) / 3, 1 )
-				smokepuffs.slice( ( i - 3 ) / 2, 1 )
-				smokepuffs.slice( i - 3, 1 )
+			// 	smokepuffs.slice( i, 1 )
+			// 	smokepuffs.slice( ( i - 3 ) / 4, 1 )
+			// 	smokepuffs.slice( ( i - 3 ) / 3, 1 )
+			// 	smokepuffs.slice( ( i - 3 ) / 2, 1 )
+			// 	smokepuffs.slice( i - 3, 1 )
+				
+			// 	console.log(smokepuffs.length)
 
-			}
+			// 	if( smokepuffs.length < 1 ) {
+
+			// 		scene.remove( particleSystem )
+			// 		scene.remove( gc )
+			// 		scene.remove( uav )
+			// 		scene.remove( cable )
+			// 		controls.minPolarAngle = THREE.Math.degToRad( 0 )
+			// 		controls.maxPolarAngle = THREE.Math.degToRad( 360 )
+
+			// 	}
+
+			// }
 
 		}
 
