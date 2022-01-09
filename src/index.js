@@ -1,3 +1,19 @@
+import { initializeApp } from "firebase/app"
+import { getAnalytics } from "firebase/analytics"
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC0g-HumVtFRCdfDKcl2ng0bF6Mb6exsTA",
+  authDomain: "sky-crayon.firebaseapp.com",
+  projectId: "sky-crayon",
+  storageBucket: "sky-crayon.appspot.com",
+  messagingSenderId: "269257539590",
+  appId: "1:269257539590:web:efa18d7c9e4dd0efcf4387",
+  measurementId: "G-6SHPVF9JRF"
+}
+
+const app = initializeApp( firebaseConfig )
+const analytics = getAnalytics( app )
+
 import * as THREE from 'three'
 
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
