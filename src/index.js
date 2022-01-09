@@ -97,6 +97,28 @@ texture.encoding = THREE.sRGBEncoding
 var matProp = new THREE.MeshLambertMaterial( { color: 0x000000, transparent: true, opacity: .3 } )
 var matTire = new THREE.MeshLambertMaterial( { color: 0x0e0e0a } )
 
+var glass = new THREE.MeshPhysicalMaterial( {
+	color: 0xffffff, transparent: true, opacity: .7,
+	roughness: 0, metalness: 1,
+	clearcoat: 1, clearcoatRoughness: .4,
+	transmission: 1,
+} )
+
+var hullPink = new THREE.MeshStandardMaterial( {
+	color: 0xDD00E7,
+	roughness: .25, metalness: .75
+} )
+
+var hullPurple = new THREE.MeshStandardMaterial( {
+	color: 0x140021,
+	roughness: .5, metalness: .5
+} )
+
+var hullYellow = new THREE.MeshStandardMaterial( {
+	color: 0xff6400,
+	roughness: 0, metalness: 1
+} )
+
 var gc
 var glass
 var hullPink
@@ -108,28 +130,6 @@ gltfLoader.load( grandCaravan, ( g ) => {
 		gc = g.scene
 
 		gc.children[36].material = matProp
-
-		glass = new THREE.MeshPhysicalMaterial( {
-			color: 0xffffff, transparent: true, opacity: .7,
-			roughness: 0, metalness: 1,
-			clearcoat: 1, clearcoatRoughness: .4,
-			transmission: 1,
-		} )
-
-		hullPink = new THREE.MeshStandardMaterial( {
-			color: 0xDD00E7,
-			roughness: .25, metalness: .75
-		} )
-
-		hullPurple = new THREE.MeshStandardMaterial( {
-			color: 0x140021,
-			roughness: .5, metalness: .5
-		} )
-
-		hullYellow = new THREE.MeshStandardMaterial( {
-			color: 0xff6400,
-			roughness: 0, metalness: 1
-		} )
 
 		gc.children[31].material =
 			gc.children[32].material =
@@ -587,7 +587,7 @@ function animate() {
 			particleSystem.geometry.attributes.color.array[ smokepuffs[ i ] ] 
 			-= .0001
 			particleSystem.geometry.attributes.size.array[ ( smokepuffs[ i ] - 3 ) / 4 ] 
-			+= .1
+			+= .2
 			particleSystem.geometry.attributes.rotation.array[ ( smokepuffs[ i ] - 3 ) / 4 ] 
 			+= .02
 			particleSystem.geometry.attributes.position.array[ ( smokepuffs[ i ] - 3 ) / 4 ] 
@@ -609,7 +609,8 @@ function animate() {
 
 				if( smokepuffs.length < 1 ) {
 
-					scene.remove( particleSystem )
+					console.log(particleSystem)
+					//scene.remove( particleSystem )
 					scene.remove( gc )
 					scene.remove( uav )
 					scene.remove( cable )
