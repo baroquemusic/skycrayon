@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
-  <style>
-    html, body {
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/favicon.ico" type="image/x-icon"><style>html, body {
       overflow: hidden;
       margin: 0;
       width: 100%;
@@ -14,7 +7,7 @@
 
     #loading-screen {
       position: absolute;
-      z-index: 2;
+      z-index: 10;
       top: 0;
       left: 0;
       width: 100%;
@@ -25,84 +18,149 @@
     }
 
     #loading-screen.fade-out {
-        opacity: 0;
+      opacity: 0;
+    }
+
+    #logo {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      width: 300px;
     }
 
     #loader {
-        display: block;
-        position: relative;
-        left: 50%;
-        top: 50%;
-        width: 150px;
-        height: 150px;
-        margin: -75px 0 0 -75px;
-        border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: #9370DB;
-        -webkit-animation: spin 2s linear infinite;
-        animation: spin 2s linear infinite;
+      position: absolute;
+      margin: -275px 0 0 -275px;
+      top: 50%;
+      left: 50%;
+      width: 550px;
+      height: 550px;
+      border-radius: 50%;
+      border: 15px solid transparent;
+      border-top-color: #ff9900;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
     }
     #loader:before {
-        content: "";
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        right: 5px;
-        bottom: 5px;
-        border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: #BA55D3;
-        -webkit-animation: spin 3s linear infinite;
-        animation: spin 3s linear infinite;
+      content: "";
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      right: 5px;
+      bottom: 5px;
+      border-radius: 50%;
+      border: 15px solid transparent;
+      border-top-color: #6600aa;
+      -webkit-animation: spin 3s linear infinite;
+      animation: spin 3s linear infinite;
     }
     #loader:after {
-        content: "";
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        right: 15px;
-        bottom: 15px;
-        border-radius: 50%;
-        border: 3px solid transparent;
-        border-top-color: #FF00FF;
-        -webkit-animation: spin 1.5s linear infinite;
-        animation: spin 1.5s linear infinite;
+      content: "";
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      right: 25px;
+      bottom: 25px;
+      border-radius: 50%;
+      border: 15px solid transparent;
+      border-top-color: #f200ff;
+      -webkit-animation: spin 1.5s linear infinite;
+      animation: spin 1.5s linear infinite;
     }
     @-webkit-keyframes spin {
-        0%   {
-            -webkit-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -webkit-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
+      0% {
+          -webkit-transform: rotate(0deg);
+          -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+      }
+      100% {
+          -webkit-transform: rotate(360deg);
+          -ms-transform: rotate(360deg);
+          transform: rotate(360deg);
+      }
     }
     @keyframes spin {
-        0%   {
-            -webkit-transform: rotate(0deg);
-            -ms-transform: rotate(0deg);
-            transform: rotate(0deg);
-        }
-        100% {
-            -webkit-transform: rotate(360deg);
-            -ms-transform: rotate(360deg);
-            transform: rotate(360deg);
-        }
+      0% {
+          -webkit-transform: rotate(0deg);
+          -ms-transform: rotate(0deg);
+          transform: rotate(0deg);
+      }
+      100% {
+          -webkit-transform: rotate(360deg);
+          -ms-transform: rotate(360deg);
+          transform: rotate(360deg);
+      }
     }
-  </style>
-  <title>SkyCrayon Demo Flight</title>
-<link rel="icon" href="favicon.ico"><script defer src="main.69e7a7b99d210e901bd5.js"></script></head>
-<body>
-  <section id="loading-screen">
-    <div><img src="/SkyCrayon_logo.svg" alt="SkyCrayon"></div>
-    <div id="loader"></div>
-  </section>
-  <script type="x-shader/x-vertex" id="vertexShader">
-
-    attribute float size;
+    #progress-bar {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300px;
+      height: 20px;
+      background: black;
+      border: 10px solid black;
+      transform: translate(-50%, 150%);
+    }
+    #progress {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border: none;
+    }
+    #canvasLogo {
+      width: 15.4rem;
+    }
+    @font-face {
+      font-family: Philosopher;
+      src: url(Philosopher.woff);
+    }
+    #slogan {
+      position: absolute;
+      font-family: Philosopher;
+      font-size: 1.25rem;
+      margin: 2% 0 0 2%;
+    }
+    #description {
+      position: absolute;
+      font-family: Philosopher;
+      font-size: 1.25rem;
+      bottom: 2%;
+      text-align: center;
+      width: 100%;
+    }
+    #contact {
+      position: absolute;
+      font-family: Philosopher;
+      font-size: 1.25rem;
+      top: 3%;
+      right: 2%;
+      text-align: right;
+      line-height: 1.5em;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 2px 5px;
+    }
+    a:hover {
+      background-color: black;
+      color: white
+    }
+    #cta {
+      position: absolute;
+      font-family: Philosopher;
+      font-size: 1.25rem;
+      top: 3%;
+      text-align: center;
+      left: 50%;
+      transform: translate(-50%, 0);
+      visibility: hidden;
+      line-height: 1.5em;
+    }</style><title>SkyCrayon Demo Flight</title><link rel="icon" href="favicon.ico"><script defer="defer" src="main.990f009d0e9e396015fb.js"></script></head><body><section id="loading-screen"><img src="/SkyCrayon_logo.svg" alt="SkyCrayon" id="logo"><div id="progress-bar"><div id="progress"></div></div><div id="loader"></div></section><div id="slogan"><img src="/SkyCrayon_logo.svg" alt="SkyCrayon" id="canvasLogo"><br/>new media above the horizon</div><div id="contact"><a href="mailto:hi@skycrayon.com">hi@skycrayon.com</a><br/>(650) 532-3504</div><div id="description">Aerial imaging technology: printing a several miles long and hundreds of feet wide full color image on the sky with biodegradable smoke</div><div id="cta">Drag anywhere to rotate, scroll to zoom.<br/><a href=".">Reload & restart animation</a></div><script type="x-shader/x-vertex" id="vertexShader">attribute float size;
     attribute float rotation;
     attribute vec4 color;
 
@@ -119,12 +177,7 @@
       vRotation = vec2( cos( rotation ), sin( rotation ) );
       vColor = color;
 
-    }
-    
-  </script>
-  <script type="x-shader/x-fragment" id="fragmentShader">
-
-    uniform vec4 color;
+    }</script><script type="x-shader/x-fragment" id="fragmentShader">uniform vec4 color;
     uniform sampler2D pointTexture;
 
     varying vec4 vColor;
@@ -143,8 +196,7 @@
       gl_FragColor = vec4( vColor );
       gl_FragColor = gl_FragColor * texture2D( pointTexture, rotatedPointCoords );
 
-    }
-
-	</script>
-</body>
-</html>
+    }</script><script async src="https://www.googletagmanager.com/gtag/js?id=G-L6GZVCQR1H"></script><script>window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-L6GZVCQR1H');</script></body></html>
