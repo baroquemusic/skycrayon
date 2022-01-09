@@ -321,11 +321,10 @@ document.body.appendChild( renderer.domElement )
 
 const controls = new OrbitControls( camera, renderer.domElement )
 
-//controls.enableZoom = false
 controls.enablePan = false
 controls.enableDamping = true
 controls.dampingFactor = .2
-controls.minDistance = 50
+controls.minDistance = 5
 controls.maxDistance = 250
 
 ///////////////////// PARTICLE SYSTEM

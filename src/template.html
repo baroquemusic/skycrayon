@@ -125,11 +125,30 @@
       font-family: Philosopher;
       src: url(Philosopher.woff);
     }
-    #text {
+    #slogan {
       position: absolute;
       font-family: Philosopher;
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       margin: 5% 0 0 2%;
+    }
+    #description {
+      position: absolute;
+      font-family: Philosopher;
+      font-size: 1.25rem;
+      margin: 45% 0 0 20%;
+    }
+    #contact {
+      position: absolute;
+      font-family: Philosopher;
+      font-size: 1.25rem;
+      top: 5%;
+      right: 2%;
+      text-align: right;
+      line-height: 1.5em;
+    }
+    a {
+      text-decoration: none;
+      color: black;
     }
   </style>
   <title><%= htmlWebpackPlugin.options.title %></title>
@@ -142,8 +161,15 @@
     <div id="loader"></div>
   </section>
   <img src="/SkyCrayon_logo.svg" alt="SkyCrayon" id="canvasLogo">
-  <div id="text">
+  <div id="slogan">
     new media above the horizon
+  </div>
+  <div id="contact">
+    <a href="mailto:hi@skycrayon.com">hi@skycrayon.com</a><br />
+    (650) 532 3504
+  </div>
+  <div id="description">
+    Aerial imaging technology: printing a several miles long and hundreds of feet wide full color image on the sky with biodegradable smoke
   </div>
   <script type="x-shader/x-vertex" id="vertexShader">
 
