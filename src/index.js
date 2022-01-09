@@ -65,9 +65,8 @@ manager.onProgress = function ( item, loaded, total ) {
 
 const texture = textureLoader.load(
 
-	hdri,
+	hdri, () => {
 
-	() => {
 		const rendertarget = new THREE.WebGLCubeRenderTarget( texture.image.height )
 		rendertarget.fromEquirectangularTexture( renderer, texture )
 
@@ -241,6 +240,8 @@ function startTween() {
 		cameraTweening = false
 		controls.minPolarAngle = THREE.Math.degToRad( 95 )
 		controls.maxPolarAngle = THREE.Math.degToRad( 180 )
+		const cta = document.getElementById( 'cta' )
+		cta.style.visibility = 'visible'
 	
 	} )
 

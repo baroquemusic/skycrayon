@@ -117,9 +117,7 @@
       border: none;
     }
     #canvasLogo {
-      position: absolute;
-      width: 10%;
-      margin: 2% 0 0 2%;
+      width: 15.4rem;
     }
     @font-face {
       font-family: Philosopher;
@@ -129,19 +127,21 @@
       position: absolute;
       font-family: Philosopher;
       font-size: 1.25rem;
-      margin: 5% 0 0 2%;
+      margin: 2% 0 0 2%;
     }
     #description {
       position: absolute;
       font-family: Philosopher;
       font-size: 1.25rem;
-      margin: 45% 0 0 20%;
+      bottom: 2%;
+      text-align: center;
+      width: 100%;
     }
     #contact {
       position: absolute;
       font-family: Philosopher;
       font-size: 1.25rem;
-      top: 5%;
+      top: 3%;
       right: 2%;
       text-align: right;
       line-height: 1.5em;
@@ -149,6 +149,24 @@
     a {
       text-decoration: none;
       color: black;
+      border: 1px solid black;
+      border-radius: 10px;
+      padding: 2px 5px;
+    }
+    a:hover {
+      background-color: black;
+      color: white
+    }
+    #cta {
+      position: absolute;
+      font-family: Philosopher;
+      font-size: 1.25rem;
+      top: 3%;
+      text-align: center;
+      left: 50%;
+      transform: translate(-50%, 0);
+      visibility: hidden;
+      line-height: 1.5em;
     }
   </style>
   <title><%= htmlWebpackPlugin.options.title %></title>
@@ -160,16 +178,21 @@
     
     <div id="loader"></div>
   </section>
-  <img src="/SkyCrayon_logo.svg" alt="SkyCrayon" id="canvasLogo">
+  
   <div id="slogan">
+    <img src="/SkyCrayon_logo.svg" alt="SkyCrayon" id="canvasLogo"><br />
     new media above the horizon
   </div>
   <div id="contact">
     <a href="mailto:hi@skycrayon.com">hi@skycrayon.com</a><br />
-    (650) 532 3504
+    (650) 532-3504
   </div>
   <div id="description">
     Aerial imaging technology: printing a several miles long and hundreds of feet wide full color image on the sky with biodegradable smoke
+  </div>
+  <div id="cta">
+    Drag anywhere to rotate, scroll to zoom.<br />
+    <a href=".">Reload & restart animation</a>
   </div>
   <script type="x-shader/x-vertex" id="vertexShader">
 
