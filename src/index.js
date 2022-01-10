@@ -406,7 +406,7 @@ function createParticles() {
 		fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
 		blending: NormalBlending,
 		transparent: true,
-		depthTest: true
+		depthTest: false
 		
 	} )
 
