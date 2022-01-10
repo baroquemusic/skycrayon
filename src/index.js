@@ -406,7 +406,7 @@ function createParticles() {
 		fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
 		blending: NormalBlending,
 		transparent: true,
-		depthTest: false
+		depthTest: true
 		
 	} )
 
@@ -455,11 +455,10 @@ function createParticles() {
 	geometry.setAttribute( 'rotation', new THREE.Float32BufferAttribute( rotations, 1 )
 		.setUsage( THREE.DynamicDrawUsage ) )
 	
-	geometry.attributes.color.needsUpdate = true
-	geometry.attributes.position.needsUpdate = true
-	geometry.attributes.size.needsUpdate = true
-	geometry.attributes.rotation.needsUpdate = true
-	
+	geometry.attributes.color.needsUpdate = 
+	geometry.attributes.position.needsUpdate = 
+	geometry.attributes.size.needsUpdate = 
+	geometry.attributes.rotation.needsUpdate = 
 	shaderMaterial.needsUpdate = true
 	
 	particleSystem = new THREE.Points( geometry, shaderMaterial )
@@ -600,7 +599,7 @@ function animate() {
 			particleSystem.geometry.attributes.position.array[ ( smokepuffs[ i ] - 3 ) ] 
 			+= ( Math.random() -.5 ) / 5
 
-			if ( particleSystem.geometry.attributes.color.array[ smokepuffs[ i ] ] <= 0 ) {
+			if ( particleSystem.geometry.attributes.color.array[ smokepuffs[ i ] ].length <= 0 ) {
 
 				smokepuffs.splice( i, 1 )
 				smokepuffs.splice( ( i - 3 ) / 4, 1 )
@@ -623,9 +622,9 @@ function animate() {
 
 		}
 
-		particleSystem.geometry.attributes.position.needsUpdate = true
-		particleSystem.geometry.attributes.color.needsUpdate = true
-		particleSystem.geometry.attributes.size.needsUpdate = true
+		particleSystem.geometry.attributes.position.needsUpdate =
+		particleSystem.geometry.attributes.color.needsUpdate =
+		particleSystem.geometry.attributes.size.needsUpdate =
 		particleSystem.geometry.attributes.rotation.needsUpdate = true
 
 	}
