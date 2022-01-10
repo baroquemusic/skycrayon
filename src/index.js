@@ -610,8 +610,7 @@ function animate() {
 
 				if( smokepuffs.length < 1 ) {
 
-					console.log(particleSystem)
-					//scene.remove( particleSystem )
+					scene.remove( particleSystem )
 					scene.remove( gc )
 					scene.remove( uav )
 					scene.remove( cable )
