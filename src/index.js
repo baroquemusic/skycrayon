@@ -71,11 +71,12 @@ const loader = document.getElementById( 'loader' )
 
 manager.onProgress = function ( item, loaded, total ) {
 
-	const grow = 550 + ( loaded / total * 275 )
-	progress.style.width = grow / 3 + 20 + 'px'
+	const grow = loaded / total * 200
 
-	loader.style.width = loader.style.height = grow + 'px'
-	loader.style.margin = ( -grow / 2 ) + 'px 0 0 ' + ( -grow / 2 ) + 'px'
+	progress.style.width = grow + 'px'
+
+	loader.style.width = loader.style.height = 600 + grow + 'px'
+	loader.style.margin = ( -grow - 600 ) / 2 + 'px 0 0 ' + ( -grow - 600 ) / 2 + 'px'
 
 }
 
